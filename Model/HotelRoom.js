@@ -19,9 +19,18 @@ const HotelRoomSchema = new mongoose.Schema(
                 am : {type:String, required : true}
             },
             facilities : {
-                en : [{type:String, required : true}],
-                ru : [{type:String, required : true}],
-                am : [{type:String, required : true}]
+                en : [{
+                    key : {type:String, required : true},
+                    item: {type:String, required : true}
+                }],
+                ru : [{
+                    key : {type:String, required : true},
+                    item: {type:String, required : true}
+                }],
+                am : [{
+                    key : {type:String, required : true},
+                    item: {type:String, required : true}
+                }]
             },
             hotel_id : {type: mongoose.Schema.Types.ObjectId, ref:"Hotels"},
             reserves : [{type: mongoose.Schema.Types.ObjectId, ref:"CartItem"}]

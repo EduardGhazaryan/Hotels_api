@@ -7,7 +7,6 @@ import Connection from "./Utils/connection.js"
 import Credentials from "./Config/credentials.js"
 import CorsOptions from "./Config/corsOptions.js"
 
-import SeedRouter from "./Route/SeedRouter.js"
 import HotelsRouter from "./Route/HotelsRouter.js"
 import AuthRouter from "./Route/AuthRouter.js"
 import CartRouter from "./Route/CartRouter.js"
@@ -22,7 +21,6 @@ app.use(Credentials)
 app.use(cors(CorsOptions))
 app.use(express.json())
 
-app.use("/api/seed", SeedRouter)
 app.use("/api/hotels", HotelsRouter)
 app.use("/api/auth", AuthRouter)
 app.use("/api/cart", CartRouter)

@@ -157,15 +157,3 @@ const HotelsService = {
 }
 
 export default HotelsService
-
-
-
-
-
-// filteredByLanguage = allHotels.map((e)=>{
-//     return {
-//         ...e,
-//         country : e.country.en,
-//         city : e.city.en
-//     }
-// })
