@@ -10,7 +10,7 @@ const UserController = {
             const data = await UserService.changeUser(id,firstName,lastName,email,password,language)
 
             if(data.status < 400){
-                res.status(data.status).send({message: data.message,success:data.success, user : data.user})
+                res.status(data.status).send({message: data.message,success:data.success, user : data.user, token: data.token})
             }else{
             res.status(data.status).send({message: data.message,success:data.success})
 

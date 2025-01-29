@@ -3,6 +3,7 @@ import CartItem from "../Model/CartItem.js"
 import HotelRoom from "../Model/HotelRoom.js"
 import User from "../Model/User.js"
 import bcrypt from "bcrypt"
+import { generateAccessToken } from "../Utils/generateToken.js"
 
 const UserService = {
     changeUser : async(id,firstName,lastName,email,password,language)=>{
@@ -14,9 +15,10 @@ const UserService = {
                     findUser.lastName = lastName ? lastName : findUser.lastName
                     findUser.email = email ? email : findUser.email
                     findUser.password = password ? bcrypt.hashSync(password,10): findUser.password
+                    const token = generateAccessToken(findUser)
 
                     await findUser.save()
-                    return {status: 202, success: true, message: "User Data Already Updated", user: findUser}
+                    return {status: 202, success: true, message: "User Data Already Updated", user: findUser,token }
                 }else{
                 return {status:404, success:false, message:"User Not Found Invalid ID"}
 
