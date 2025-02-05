@@ -42,16 +42,16 @@ const AuthService = {
                 }else{
                     if(language){
                         if(language === "am"){
-                            return {status: 200, message: "Ձեր գաղտնաբառերը չեն համընկնում", success:false}
+                            return {status: 200, errors : [{message: "Ձեր գաղտնաբառերը չեն համընկնում",field: "confirmPassword"}] , success:false}
                         }
                         if(language === "ru"){
-                            return {status: 200, message: "Ваши пароли не совпадают", success:false}
+                            return {status: 200,errors : [{message: "Ваши пароли не совпадают",field: "confirmPassword"}] , success:false}
                         }
                         if(language === "en"){
-                            return {status: 200, message: "Your Passwords Don't Match", success:false}
+                            return {status: 200,errors : [{message: "Your Passwords Don't Match",field: "confirmPassword"}] , success:false}
                         }
                     }else{
-                        return {status: 200, message: "Your Passwords Don't Match", success:false}
+                        return {status: 200, errors : [{message: "Your Passwords Don't Match",field: "confirmPassword"}] , success:false}
                     }
 
                 }
@@ -59,20 +59,20 @@ const AuthService = {
             }else{
                 if(language){
                     if(language === "am"){
-                        return {status: 200, message: "Այս էլփոստով օգտատեր արդեն գոյություն ունի", success:false}
+                        return {status: 200, errors : [{message: "Այս էլփոստով օգտատեր արդեն գոյություն ունի",field: "email"}], success:false}
                     }
                     if(language === "ru"){
-                        return {status: 200, message: "Пользователь с таким адресом электронной почты уже существует", success:false}
+                        return {status: 200,errors : [{message: "Пользователь с таким адресом электронной почты уже существует",field: "email"}] , success:false}
                     }
                     if(language === "en"){
-                        return {status: 200, message: "User With This Email Already Exists", success:false}
+                        return {status: 200,errors : [{ message: "User With This Email Already Exists",field: "email"}], success:false}
                     }
                 }else{
-                    return {status: 200, message: "User With This Email Already Exists", success:false}
+                    return {status: 200, errors : [{ message: "User With This Email Already Exists",field: "email"}], success:false}
                 }
                 
             }
-        }else{
+        }else{ 
             return {status:400, success:false, message:"Bad Request"}
         }
     },
@@ -85,38 +85,38 @@ const AuthService = {
                     findUser.access_token = access_token
                     await findUser.save()
 
-                    return {status: 200, message: "You Have Successfully Logged In", success:true, user : findUser}
+                    return {status: 200, message: "You Have Successfully Logged In", success:true, access_token}
 
 
                 }else{
                     if(language){
                         if(language === "am"){
-                            return {status: 200, message: "Ինչ-որ բան այն չէ, խնդրում ենք ստուգել ձեր գաղտնաբառը" ,success:false};
+                            return {status: 200, errors : [{message: "Ինչ-որ բան այն չէ, խնդրում ենք ստուգել ձեր գաղտնաբառը",filed:"password"}]  ,success:false};
                         }
                         if(language === "ru"){
-                            return {status: 200, message: "Что-то не так. Проверьте пароль." ,success:false};
+                            return {status: 200, errors : [{message: "Что-то не так. Проверьте пароль.",filed:"password"}]  ,success:false};
                         }
                         if(language === "en"){
-                            return {status: 200, message: "Something is Wrong Please Check Your Password" ,success:false};
+                            return {status: 200, errors : [{message: "Something is Wrong Please Check Your Password",filed:"password"}]  ,success:false};
                         }
                     }else{
-                        return {status: 200, message: "Something is Wrong Please Check Your Password" ,success:false};
+                        return {status: 200, errors : [{message: "Something is Wrong Please Check Your Password",filed:"password"}] ,success:false};
                     }
                 }
 
             }else{
                 if(language){
                     if(language === "am"){
-                        return {status: 200, message: "Ինչ-որ բան այն չէ, խնդրում ենք ստուգել ձեր էլփոստի հասցեն" ,success:true};
+                        return {status: 200, errors : [{message: "Ինչ-որ բան այն չէ, խնդրում ենք ստուգել ձեր էլփոստի հասցեն",field:"email"}]  ,success:true};
                     }
                     if(language === "ru"){
-                        return {status: 200, message: "Что-то не так. Проверьте адрес электронной почты." ,success:true};
+                        return {status: 200, errors : [{message: "Что-то не так. Проверьте адрес электронной почты." ,field:"email"}] ,success:true};
                     }
                     if(language === "en"){
-                        return {status: 200, message: "Something is Wrong Please Check Your Email Address" ,success:true};
+                        return {status: 200, errors : [{message: "Something is Wrong Please Check Your Email Address" ,field:"email"}] ,success:true};
                     }
                 }else{
-                    return {status: 200, message: "Something is Wrong Please Check Your Email Address" ,success:true};
+                    return {status: 200, errors : [{message: "Something is Wrong Please Check Your Email Address" ,field:"email"}] ,success:true};
                 }
             }
         }else{

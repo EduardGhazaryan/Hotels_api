@@ -25,7 +25,7 @@ const AuthController= {
 
             if(data.status < 400){
                 if(data.success){
-                    res.status(data.status).send({message: data.message,success:data.success,user: data.user})
+                    res.status(data.status).send({message: data.message,success:data.success,access_token: data.access_token})
                 }else{
                     res.status(data.status).send({message: data.message,success:data.success})
                 }

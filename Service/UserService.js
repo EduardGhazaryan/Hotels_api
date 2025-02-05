@@ -6,6 +6,14 @@ import bcrypt from "bcrypt"
 import { generateAccessToken } from "../Utils/generateToken.js"
 
 const UserService = {
+    getUser: async(user_id)=>{
+        const user = await User.findById(user_id)
+        if(user){
+            return {user, success:true,status: 200}
+        }else{
+            return {message:"Invalid ID",success:false,status:400}
+        }
+    },
     changeUser : async(id,firstName,lastName,email,password,language)=>{
         try {
             if(id && firstName || lastName || email || password){

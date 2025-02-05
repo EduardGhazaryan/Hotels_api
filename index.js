@@ -12,6 +12,7 @@ import AuthRouter from "./Route/AuthRouter.js"
 import CartRouter from "./Route/CartRouter.js"
 import UserRouter from "./Route/UserRouter.js"
 import { archiveReserve } from "./Utils/archiveReserve.js"
+import isAuth from "./Middleware/isAuth.js"
 
 const app = express()
 const dotenv = configDotenv()
@@ -23,8 +24,8 @@ app.use(express.json())
 
 app.use("/api/hotels", HotelsRouter)
 app.use("/api/auth", AuthRouter)
-app.use("/api/cart", CartRouter)
-app.use("/api/user", UserRouter)
+app.use("/api/cart", isAuth ,CartRouter)
+app.use("/api/user", isAuth ,UserRouter)
 
 
 cron.schedule('0 9 * * *', () => {
