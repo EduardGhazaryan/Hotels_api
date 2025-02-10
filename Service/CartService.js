@@ -1,3 +1,4 @@
+import { populate } from "dotenv"
 import Cart from "../Model/Cart.js"
 import CartItem from "../Model/CartItem.js"
 import HotelRoom from "../Model/HotelRoom.js"
@@ -17,7 +18,7 @@ const CartService = {
                         path: 'reserved_hotels',
                         populate: [
                           { path: 'hotel' }, 
-                          { path: 'reserved_room' } 
+                          { path: 'reserved_room', populate : [{path : "reserves", select: ["reserve_start","reserve_end"]}] } 
                         ]
                       });
 
@@ -421,12 +422,15 @@ const CartService = {
             const newEndDate = new Date(reserve_end);
 
             const checkReserves = findRoom.reserves.some(reserve=>{
-                const existingStartDate = new Date(reserve.reserve_start);
-                const existingEndDate = new Date(reserve.reserve_end);
-                
-                return (
-                    (newStartDate < existingEndDate && newEndDate > existingStartDate ) 
-                )
+                if(toString(reserve._id ) !== id){
+                    const existingStartDate = new Date(reserve.reserve_start);
+                    const existingEndDate = new Date(reserve.reserve_end);
+                    
+                    return (
+                        (newStartDate < existingEndDate && newEndDate > existingStartDate ) 
+                    )
+                }
+
             })
           
 
