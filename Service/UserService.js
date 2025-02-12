@@ -58,13 +58,12 @@ const UserService = {
                                   const removeReserve = await CartItem.findByIdAndDelete(h)
                             }
                         })
-                        const removeCart  = await Cart.findByIdAndDelete(findUser.cart)
-                        const removeUser = await User.findByIdAndDelete(id)
-    
-                        return {status: 200, message : "User Account Successfully Deleted", success:true}
-                    }else{
-                        return {status : 404, message: "Cart Not Found", success:false}
+                       
                     }
+                    const removeCart  = await Cart.findByIdAndDelete(findUser.cart)
+                    const removeUser = await User.findByIdAndDelete(id)
+
+                    return {status: 200, message : "User Account Successfully Deleted", success:true}
 
 
                 }else{
