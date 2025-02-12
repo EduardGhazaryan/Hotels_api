@@ -407,8 +407,7 @@ const CartService = {
         }
     },
     chnageReserve : async(id,firstName,lastName,email,phone,country,people_count,description,reserve_start,reserve_end,language)=>{
-        try {
-            
+
           if(firstName || lastName || email || phone || country || people_count || description || reserve_start || reserve_end){
             const updatedData = await CartItem.findById(id).populate([
                 { path: 'hotel' }, 
@@ -418,14 +417,18 @@ const CartService = {
                 path : "reserves",
                 select: "user_id reserve_start reserve_end"
             })
+
             const newStartDate = new Date(reserve_start);
             const newEndDate = new Date(reserve_end);
 
             const checkReserves = findRoom.reserves.some(reserve=>{
-                if(toString(reserve._id ) !== id){
+                if(reserve._id  == id){
+                    return false
+                    
+                }else{
                     const existingStartDate = new Date(reserve.reserve_start);
                     const existingEndDate = new Date(reserve.reserve_end);
-                    
+      
                     return (
                         (newStartDate < existingEndDate && newEndDate > existingStartDate ) 
                     )
@@ -534,10 +537,7 @@ const CartService = {
           }
               
             
-        } catch (error) {
-            console.error(error)
-            return {status: 500, success:false, message:"Internal Srever Error"}
-        }
+
     },
     removeReserve : async(id,language)=>{
         try {
