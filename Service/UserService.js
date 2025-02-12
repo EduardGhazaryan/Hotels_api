@@ -47,20 +47,25 @@ const UserService = {
 
                 if(findUser){
                     const findCart = await Cart.findById(findUser.cart)
-                    findCart.reserved_hotels.map(async (h)=>{
-                        let findReserve = await CartItem.findById(h)
-                        if(findReserve){
-                            const removeInRoom = await HotelRoom.updateOne(
-                                { _id: findReserve.reserved_room },
-                                { $pull: { reserves: h } }
-                              );
-                              const removeReserve = await CartItem.findByIdAndDelete(h)
-                        }
-                    })
-                    const removeCart  = await Cart.findByIdAndDelete(findUser.cart)
-                    const removeUser = await User.findByIdAndDelete(id)
+                    if(findCart){
+                        findCart?.reserved_hotels.map(async (h)=>{
+                            let findReserve = await CartItem.findById(h)
+                            if(findReserve){
+                                const removeInRoom = await HotelRoom.updateOne(
+                                    { _id: findReserve.reserved_room },
+                                    { $pull: { reserves: h } }
+                                  );
+                                  const removeReserve = await CartItem.findByIdAndDelete(h)
+                            }
+                        })
+                        const removeCart  = await Cart.findByIdAndDelete(findUser.cart)
+                        const removeUser = await User.findByIdAndDelete(id)
+    
+                        return {status: 200, message : "User Account Successfully Deleted", success:true}
+                    }else{
+                        return {status : 404, message: "Cart Not Found", success:false}
+                    }
 
-                    return {status: 200, message : "User Account Successfully Deleted", success:true}
 
                 }else{
                     return {status : 404, message: "User Not Found Invalid ID", success:false}
