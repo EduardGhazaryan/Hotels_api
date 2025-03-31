@@ -120,7 +120,7 @@ const CartService = {
                             _id: findReserveHistory._id,
                             user: findReserveHistory.user,
                             reserved_hotels: findReserveHistory.reserved_hotels.map((el)=>{
-                                console.log(el.hotel.country);
+        
                                 return {
                                     _id: el._id,
                                     reserves_history_id : el.reserves_history_id,
@@ -553,7 +553,7 @@ const CartService = {
                         { $pull: { reserves: id } }
                       );
 
-                      console.log("d---",removeInCart);
+            
                     const findCart = await Cart.findById(findReserve.cart_id).populate({
                         path: 'reserved_hotels',
                         populate: [

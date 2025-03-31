@@ -11,6 +11,35 @@ const isToday = (endDate) => {
     const dbDate = new Date(endDate);
   
     const today = new Date();
+    console.log("isToday",[
+
+        {
+            dbDate : dbDate.getFullYear(),
+            today : today.getFullYear(),
+            bool: dbDate.getFullYear() === today.getFullYear()
+        },
+        {
+            dbDate : dbDate.getMonth(),
+            today : today.getMonth(),
+            bool: dbDate.getMonth() === today.getMonth()
+        },
+        {
+            dbDate : dbDate.getDate(),
+            today : today.getDate(),
+            bool: dbDate.getDate() === today.getDate()
+        },
+        {
+            dbDate : dbDate.getDate(),
+            today : today.getDate(),
+            bool: dbDate.getDate() < today.getDate()
+        }
+    ]);
+    console.log("obshi---", (
+        dbDate.getFullYear() === today.getFullYear() &&
+        dbDate.getMonth() === today.getMonth() &&
+        dbDate.getDate() === today.getDate() ||
+        dbDate.getDate() < today.getDate()
+      ));
   
     return (
       dbDate.getFullYear() === today.getFullYear() &&

@@ -33,8 +33,10 @@ app.use("/api/user", isAuth ,UserRouter)
 // });
 
 cron.schedule('*/1 * * * *', () => {
+    console.log("Cron job running at:", new Date().toLocaleString());
     archiveReserve();
 });
+
 
 const PORT = process.env.PORT || 4004
 

@@ -3,7 +3,6 @@ import HotelsService from "../Service/HotelsService.js";
 const HotelsController = {
     getHotels : async (req,res)=>{
         try {
-            console.log("controller");
             const {country,city} = req.query
             const language = req.headers["accept-language"] ? req.headers["accept-language"] : "en";
             const data = await HotelsService.getHotels(country,city,language)
