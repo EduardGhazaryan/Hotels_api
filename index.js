@@ -32,7 +32,7 @@ app.use("/api/user", isAuth ,UserRouter)
 //     archiveReserve()
 // });
 
-cron.schedule('*/5 * * * *', () => {
+cron.schedule('*/1 * * * *', () => {
     archiveReserve();
 });
 
