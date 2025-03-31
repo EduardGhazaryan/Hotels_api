@@ -28,7 +28,7 @@ export async function archiveReserve(){
     if(findAllItems.length > 0){
         
         findAllItems.map(async (item)=>{
-            console.log(item.reserve_end);
+            console.log("crone work-----",item.reserve_end);
             if(isToday(item.reserve_end)){
                 
                 const findUser = await User.findById(item.user_id).populate("reserve_history")

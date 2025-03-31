@@ -28,8 +28,12 @@ app.use("/api/cart", isAuth ,CartRouter)
 app.use("/api/user", isAuth ,UserRouter)
 
 
-cron.schedule('0 9 * * *', () => {
-    archiveReserve()
+// cron.schedule('0 9 * * *', () => {
+//     archiveReserve()
+// });
+
+cron.schedule('*/5 * * * *', () => {
+    archiveReserve();
 });
 
 const PORT = process.env.PORT || 4004
